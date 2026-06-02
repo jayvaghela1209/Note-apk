@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>{% block title %}My App{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        {% block header %}
+            <div class="contain">
+                <h2>Notes App</h2>
+                <a href="{{ url_for('auth.login') }}">Logout</a>
+            </div>
+        {% endblock %}
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        {% block footer%}
+        <div class="contain">
+            <p>&copy; 2024 Notes App. All rights reserved.</p>
+        </div>
+        {% endblock %}
+    </footer>
+</body>
+</html>

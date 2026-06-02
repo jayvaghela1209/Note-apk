@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Notes{% endblock %}
+
+{% block content %}
+    <form action="{{ url_for('notes.notes') }}" method="POST">
+        <textarea name="note" placeholder="Enter your note here..."></textarea>
+        <button type="submit">Save Note</button>
+    </form>
+    
+    <div class="notes-container">
+        <h3>Your Notes:</h3>
+        {% if notes %}
+            {% for note in notes %}
+                <div class="note-item">
+                    <p>{{ note.content }}</p>
+                    <form action="{{ url_for('notes.delete_note', note_id=note.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No notes yet. Add your first note!</p>
+        {% endif %}
+    </div>
+{% endblock %}
