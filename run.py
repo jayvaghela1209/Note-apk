@@ -1,10 +1,13 @@
 from app import db, create_app
 from app.models import User, Note
+import os
 
 app = create_app()
 
-with app.app_context():
-    db.create_all()
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    # Development
+    if os.getenv('FLASK_ENV') == 'development':
+        app.run(host="0.0.0.0", port=5000, debug=True)
+    else:
+        # Production - use gunicorn instead
+        app.run(host="0.0.0.0", port=5000, debug=False)
